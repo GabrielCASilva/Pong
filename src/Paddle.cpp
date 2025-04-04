@@ -15,6 +15,15 @@ void Paddle::Loop(float deltaTime)
     acceleration = static_cast<float>(key_up - key_down);
     acceleration *= pong::paddle::ACC;
     Integrate(deltaTime);
+
+    StayOnScreen();
+}
+
+void Paddle::StayOnScreen()
+{
+    auto sup_margin = static_cast<float>(pong::MARGIN);
+    auto inf_margin = static_cast<float>(pong::WINDOW_HEIGHT - pong::MARGIN - size.height);
+    position.y = std::clamp(position.y, sup_margin, inf_margin);
 }
 
 void Paddle::Integrate(float deltaTime)
@@ -34,7 +43,7 @@ void Paddle::Integrate(float deltaTime)
 
 void Paddle::Draw() const
 {
-    int pos_x = static_cast<int>(position.x);
-    int pos_y = static_cast<int>(position.y);
+    auto pos_x = static_cast<int>(position.x);
+    auto pos_y = static_cast<int>(position.y);
     DrawRectangle(pos_x, pos_y, size.width, size.height, WHITE);
 }

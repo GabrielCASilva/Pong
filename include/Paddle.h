@@ -9,6 +9,7 @@ class Paddle
 
     void Loop(float deltaTime);
     void Draw() const;
+    void StayOnScreen();
 
   private:
     Vector2 position;
