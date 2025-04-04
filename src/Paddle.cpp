@@ -24,6 +24,10 @@ void Paddle::StayOnScreen()
     auto sup_margin = static_cast<float>(pong::MARGIN);
     auto inf_margin = static_cast<float>(pong::WINDOW_HEIGHT - pong::MARGIN - size.height);
     position.y = std::clamp(position.y, sup_margin, inf_margin);
+    if (position.y == sup_margin || position.y == inf_margin)
+    {
+        velocity.y = 0;
+    }
 }
 
 void Paddle::Integrate(float deltaTime)
@@ -31,8 +35,13 @@ void Paddle::Integrate(float deltaTime)
     velocity.y += acceleration * deltaTime * pong::PIXELS_PER_METTER;
     if (acceleration == 0)
     {
-        const float slow_velocity = 0.9F;
-        velocity.y *= slow_velocity; // Reduz a velocidade gradativamente (ajuste o fator)
+        const float slow_velocity{0.9F};
+        velocity.y *= slow_velocity;
+        const float min_threshold{0.1F};
+        if (std::abs(velocity.y) < min_threshold)
+        {
+            velocity.y = 0;
+        }
     }
     else
     {

@@ -11,8 +11,16 @@ Game::Game(int width, int height, const std::string &title)
     InitWindow(width, height, title.c_str());
 
     Size size{.width = pong::paddle::WIDTH, .height = pong::paddle::HEIGHT};
-    const Vector2 player_pos{24, 24};
+
+    // Player paddle
+    float middle_height = static_cast<float>(pong::WINDOW_HEIGHT) / 2;
+    float half_size_height = static_cast<float>(size.height) / 2;
+    float paddle_height = middle_height - half_size_height;
+    const Vector2 player_pos{24, paddle_height};
     paddle = std::make_unique<Paddle>(player_pos, size);
+
+    // TODO: Enemy paddle
+    // TODO: Ball
 }
 
 Game::~Game() noexcept

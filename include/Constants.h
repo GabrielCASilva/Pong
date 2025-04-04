@@ -12,7 +12,8 @@ namespace paddle
 {
 constexpr int WIDTH{20};
 constexpr int HEIGHT{100};
-constexpr int ACC{10};
-constexpr float MAX_VEL{200.0F};
+constexpr int ACC{20};
+constexpr float MAX_VEL{300.0F};
+
 } // namespace paddle
 } // namespace pong
