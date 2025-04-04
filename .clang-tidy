@@ -1,0 +1,11 @@
+Checks: >
+  cppcoreguidelines-*,
+  modernize-*,
+  -modernize-use-trailing-return-type,
+  -cppcoreguidelines-pro-type-union-access,
+  readability-*,
+  performance-*,
+  bugprone-*
+WarningsAsErrors: false
+HeaderFilterRegex: '.*'
+FormatStyle: file  # Usa o .clang-format se existir
