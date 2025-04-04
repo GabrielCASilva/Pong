@@ -1,5 +1,4 @@
-#ifndef GAME_H
-#define GAME_H
+#pragma once
 
 #include "Paddle.h"
 #include <memory>
@@ -10,7 +9,7 @@ class Game
   public:
     Game(int width, int height, const std::string &title);
     Game(Game &&other) = delete;
-    Game &operator=(Game &&other) = delete;
+    auto operator=(Game &&other) -> Game & = delete;
     Game(const Game &other) = delete;
     auto operator=(const Game &other) -> Game & = delete;
     ~Game() noexcept;
@@ -24,5 +23,3 @@ class Game
 
     std::unique_ptr<Paddle> paddle;
 };
-
-#endif // GAME_H

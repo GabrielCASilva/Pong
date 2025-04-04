@@ -2,13 +2,13 @@
 #include "Game.h"
 #include "raylib.h"
 
-int main()
+auto main() -> int
 {
     Game game{pong::WINDOW_WIDTH, pong::WINDOW_HEIGHT, "Pong"};
 
-    SetTargetFPS(60);
+    SetTargetFPS(pong::FPS);
 
-    while (!game.GameShouldClose())
+    while (!Game::GameShouldClose())
     {
         game.Tick();
     }

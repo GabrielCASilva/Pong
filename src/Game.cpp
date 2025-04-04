@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "Constants.h"
+#include "size.h"
 #include <cassert>
 #include <memory>
 #include <raylib.h>
@@ -7,7 +9,10 @@ Game::Game(int width, int height, const std::string &title)
 {
     assert(!GetWindowHandle());
     InitWindow(width, height, title.c_str());
-    paddle = std::make_unique<Paddle>(Vector2{24, 24}, 20, 100);
+
+    Size size{.width = pong::paddle::WIDTH, .height = pong::paddle::HEIGHT};
+    const Vector2 player_pos{24, 24};
+    paddle = std::make_unique<Paddle>(player_pos, size);
 }
 
 Game::~Game() noexcept
@@ -29,8 +34,8 @@ void Game::Tick()
 
 void Game::Update()
 {
-    float dt = GetFrameTime();
-    paddle->Loop(dt);
+    float delta_time = GetFrameTime();
+    paddle->Loop(delta_time);
 }
 
 void Game::Draw()
