@@ -1,5 +1,5 @@
-#include "Constants.h"
-#include "Game.h"
+#include "Constants.hpp"
+#include "Game.hpp"
 #include "raylib.h"
 
 auto main() -> int

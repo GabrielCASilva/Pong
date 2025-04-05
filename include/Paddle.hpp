@@ -1,6 +1,6 @@
 #pragma once
 
-#include "size.h"
+#include "size.hpp"
 #include <raylib.h>
 class Paddle
 {

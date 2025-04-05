@@ -1,7 +1,7 @@
-#include "Game.h"
-#include "Constants.h"
-#include "Player.h"
-#include "size.h"
+#include "Game.hpp"
+#include "Constants.hpp"
+#include "Player.hpp"
+#include "size.hpp"
 #include <cassert>
 #include <memory>
 #include <raylib.h>
@@ -24,9 +24,8 @@ Game::Game(int width, int height, const std::string &title)
 
     // Ball
     auto middle_width{static_cast<float>(pong::WINDOW_WIDTH) / 2};
-    const Vector2 ball_position{middle_width, middle_height};
-    const int ball_radius{12};
-    ball = std::make_unique<Ball>(ball_position, ball_radius);
+    const Vector2 ball_position{middle_width - pong::ball::RADIUS, middle_height};
+    ball = std::make_unique<Ball>(ball_position, pong::ball::RADIUS);
 }
 
 Game::~Game() noexcept
@@ -50,6 +49,7 @@ void Game::Update()
 {
     float delta_time = GetFrameTime();
     player->Loop(delta_time);
+    ball->Loop(delta_time);
 }
 
 void Game::Draw() const

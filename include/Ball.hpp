@@ -6,7 +6,7 @@ class Ball
   public:
     Ball(Vector2 position, float radius);
 
-    void Loop();
+    void Loop(float deltaTime);
     void Draw() const;
     void StayOnScreen();
 
@@ -15,4 +15,5 @@ class Ball
     Vector2 position;
     float radius;
     Vector2 velocity;
+    Vector2 direction;
 };

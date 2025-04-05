@@ -1,4 +1,4 @@
-#include "Player.h"
+#include "Player.hpp"
 
 Player::Player(Vector2 position, Size size) : Paddle(position, size)
 {

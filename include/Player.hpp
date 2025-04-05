@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Paddle.h"
-#include "size.h"
+#include "Paddle.hpp"
+#include "size.hpp"
 #include <raylib.h>
 
 class Player : public Paddle

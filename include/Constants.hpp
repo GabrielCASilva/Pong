@@ -14,6 +14,10 @@ constexpr int WIDTH{20};
 constexpr int HEIGHT{100};
 constexpr int ACC{20};
 constexpr float MAX_VEL{300.0F};
-
 } // namespace paddle
+
+namespace ball
+{
+constexpr int RADIUS{8};
+}
 } // namespace pong

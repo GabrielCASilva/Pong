@@ -1,6 +1,6 @@
-#include "Constants.h"
-#include "size.h"
-#include <Paddle.h>
+#include "Paddle.hpp"
+#include "Constants.hpp"
+#include "size.hpp"
 #include <algorithm>
 #include <raylib.h>
 
