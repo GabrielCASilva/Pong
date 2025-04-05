@@ -10,12 +10,9 @@ Paddle::Paddle(Vector2 position, Size size) : position(position), size(size), ve
 
 void Paddle::Loop(float deltaTime)
 {
-    int key_up = static_cast<int>(IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S));
-    int key_down = static_cast<int>(IsKeyDown(KEY_UP) || IsKeyDown(KEY_W));
-    acceleration = static_cast<float>(key_up - key_down);
+    acceleration = moviment();
     acceleration *= pong::paddle::ACC;
     Integrate(deltaTime);
-
     StayOnScreen();
 }
 

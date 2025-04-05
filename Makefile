@@ -51,7 +51,7 @@ bear: clean
 clean:
 	rm -rf $(BUILD_DIR) $(TARGET)
 
-run: $(TARGET)
+run: clean $(TARGET)
 	./$(TARGET)
 
 clean-all: clean
