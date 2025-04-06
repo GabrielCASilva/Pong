@@ -1,7 +1,8 @@
-#pragma once
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
 
 #include "Paddle.hpp"
-#include "size.hpp"
+#include "Size.hpp"
 #include <raylib.h>
 
 class Player : public Paddle
@@ -10,3 +11,4 @@ class Player : public Paddle
     Player(Vector2 position, Size size);
     auto moviment() -> float override;
 };
+#endif // !PLAYER_HPP

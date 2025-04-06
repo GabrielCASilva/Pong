@@ -1,7 +1,7 @@
 #include "Game.hpp"
 #include "Constants.hpp"
 #include "Player.hpp"
-#include "size.hpp"
+#include "Size.hpp"
 #include <cassert>
 #include <memory>
 #include <raylib.h>

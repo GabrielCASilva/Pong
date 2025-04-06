@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CONSTANTS_HPP
+#define CONSTANTS_HPP
 
 namespace pong
 {
@@ -21,3 +22,4 @@ namespace ball
 constexpr int RADIUS{8};
 }
 } // namespace pong
+#endif // !CONSTANTS_HPP

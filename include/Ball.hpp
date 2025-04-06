@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BALL_HPP
+#define BALL_HPP
 
 #include <raylib.h>
 class Ball
@@ -17,3 +18,4 @@ class Ball
     Vector2 velocity;
     Vector2 direction;
 };
+#endif // !BALL_HPP

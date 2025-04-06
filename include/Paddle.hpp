@@ -1,6 +1,7 @@
-#pragma once
+#ifndef PADDLE_HPP
+#define PADDLE_HPP
 
-#include "size.hpp"
+#include "Size.hpp"
 #include <raylib.h>
 class Paddle
 {
@@ -27,3 +28,4 @@ class Paddle
 
     auto Integrate(float deltaTime) -> void;
 };
+#endif // !PADDLE_HPP

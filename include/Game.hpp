@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GAME_HPP
+#define GAME_HPP
 
 #include "Ball.hpp"
 #include "Player.hpp"
@@ -25,3 +26,4 @@ class Game
     std::unique_ptr<Player> player;
     std::unique_ptr<Ball> ball;
 };
+#endif // !GAME_HPP
