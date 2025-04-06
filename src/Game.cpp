@@ -39,20 +39,20 @@ auto Game::GameShouldClose() -> bool
     return WindowShouldClose();
 }
 
-void Game::Tick()
+auto Game::Tick() -> void
 {
     Update();
     Draw();
 }
 
-void Game::Update()
+auto Game::Update() -> void
 {
     float delta_time = GetFrameTime();
     player->Loop(delta_time);
     ball->Loop(delta_time);
 }
 
-void Game::Draw() const
+auto Game::Draw() const -> void
 {
     BeginDrawing();
 

@@ -16,11 +16,11 @@ class Game
     auto operator=(const Game &other) -> Game & = delete;
 
     [[nodiscard]] static auto GameShouldClose() -> bool;
-    void Tick();
+    auto Tick() -> void;
 
   private:
-    void Draw() const;
-    void Update();
+    auto Draw() const -> void;
+    auto Update() -> void;
 
     std::unique_ptr<Player> player;
     std::unique_ptr<Ball> ball;

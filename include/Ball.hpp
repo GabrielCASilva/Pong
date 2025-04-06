@@ -6,9 +6,9 @@ class Ball
   public:
     Ball(Vector2 position, float radius);
 
-    void Loop(float deltaTime);
-    void Draw() const;
-    void StayOnScreen();
+    auto Loop(float deltaTime) -> void;
+    auto Draw() const -> void;
+    auto StayOnScreen() -> void;
 
   private:
     float acceleration{0};

@@ -8,5 +8,5 @@ class Player : public Paddle
 {
   public:
     Player(Vector2 position, Size size);
-    float moviment() override;
+    auto moviment() -> float override;
 };

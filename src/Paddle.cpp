@@ -8,7 +8,7 @@ Paddle::Paddle(Vector2 position, Size size) : position(position), size(size), ve
 {
 }
 
-void Paddle::Loop(float deltaTime)
+auto Paddle::Loop(float deltaTime) -> void
 {
     acceleration = moviment();
     acceleration *= pong::paddle::ACC;
@@ -16,7 +16,7 @@ void Paddle::Loop(float deltaTime)
     StayOnScreen();
 }
 
-void Paddle::StayOnScreen()
+auto Paddle::StayOnScreen() -> void
 {
     auto sup_margin = static_cast<float>(pong::MARGIN);
     auto inf_margin = static_cast<float>(pong::WINDOW_HEIGHT - pong::MARGIN - size.height);
@@ -27,7 +27,7 @@ void Paddle::StayOnScreen()
     }
 }
 
-void Paddle::Integrate(float deltaTime)
+auto Paddle::Integrate(float deltaTime) -> void
 {
     velocity.y += acceleration * deltaTime * pong::PIXELS_PER_METTER;
     if (acceleration == 0)
@@ -47,7 +47,7 @@ void Paddle::Integrate(float deltaTime)
     position.y += velocity.y * deltaTime;
 }
 
-void Paddle::Draw() const
+auto Paddle::Draw() const -> void
 {
     auto pos_x = static_cast<int>(position.x);
     auto pos_y = static_cast<int>(position.y);

@@ -4,7 +4,7 @@ Player::Player(Vector2 position, Size size) : Paddle(position, size)
 {
 }
 
-float Player::moviment()
+auto Player::moviment() -> float
 {
     int key_up = static_cast<int>(IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S));
     int key_down = static_cast<int>(IsKeyDown(KEY_UP) || IsKeyDown(KEY_W));

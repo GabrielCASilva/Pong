@@ -4,11 +4,11 @@
 #include <raylib.h>
 
 Ball::Ball(Vector2 position, float radius)
-    : position(position), radius(radius), velocity({.x = 0, .y = 0}), direction({.x = 1, .y = 0})
+    : position(position), radius(radius), velocity({.x = 0, .y = 0}), direction({.x = 1, .y = 1})
 {
 }
 
-void Ball::Loop(float deltaTime)
+auto Ball::Loop(float deltaTime) -> void
 {
     const float acc{10.0F};
     acceleration = acc;
@@ -23,6 +23,18 @@ void Ball::Loop(float deltaTime)
     position.y += velocity.y * deltaTime;
 
     ////// continue on screen
+    StayOnScreen();
+}
+
+auto Ball::Draw() const -> void
+{
+    auto pos_x{static_cast<int>(position.x)};
+    auto pos_y{static_cast<int>(position.y)};
+    DrawCircle(pos_x, pos_y, radius, WHITE);
+}
+
+auto Ball::StayOnScreen() -> void
+{
     const auto min_pos_x{static_cast<float>(pong::ball::RADIUS)};
     const auto max_pos_x{static_cast<float>(pong::WINDOW_WIDTH - pong::ball::RADIUS)};
     position.x = std::clamp(position.x, min_pos_x, max_pos_x);
@@ -35,15 +47,9 @@ void Ball::Loop(float deltaTime)
     const auto min_pos_y{static_cast<float>(pong::ball::RADIUS)};
     const auto max_pos_y{static_cast<float>(pong::WINDOW_HEIGHT - pong::ball::RADIUS)};
     position.y = std::clamp(position.y, min_pos_y, max_pos_y);
-}
-
-void Ball::Draw() const
-{
-    auto pos_x{static_cast<int>(position.x)};
-    auto pos_y{static_cast<int>(position.y)};
-    DrawCircle(pos_x, pos_y, radius, WHITE);
-}
-
-void Ball::StayOnScreen()
-{
+    if (position.y >= max_pos_y || position.y <= min_pos_y)
+    {
+        direction.y *= -1;
+        velocity.y *= -1;
+    }
 }
