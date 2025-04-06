@@ -17,7 +17,7 @@ Game::Game(int width, int height, const std::string &title)
     auto middle_height = static_cast<float>(pong::WINDOW_HEIGHT) / 2;
     auto half_size_height = static_cast<float>(size.height) / 2;
     float paddle_height = middle_height - half_size_height;
-    const Vector2 player_pos{24, paddle_height};
+    const Vector2 player_pos{pong::PADDLE_MARGIN, paddle_height};
     player = std::make_unique<Player>(player_pos, size);
 
     // TODO: Enemy paddle
@@ -50,6 +50,8 @@ auto Game::Update() -> void
     float delta_time = GetFrameTime();
     player->Loop(delta_time);
     ball->Loop(delta_time);
+    ball->BouceOnPaddle(*player, -1);
+    ball->StayOnScreen();
 }
 
 auto Game::Draw() const -> void

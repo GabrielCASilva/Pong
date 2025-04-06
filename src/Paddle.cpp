@@ -53,3 +53,13 @@ auto Paddle::Draw() const -> void
     auto pos_y = static_cast<int>(position.y);
     DrawRectangle(pos_x, pos_y, size.width, size.height, WHITE);
 }
+
+auto Paddle::getSize() const -> Size
+{
+    return size;
+}
+
+auto Paddle::getPosition() const -> Vector2
+{
+    return position;
+}

@@ -8,6 +8,7 @@ constexpr int WINDOW_HEIGHT{600};
 constexpr int FPS{60};
 constexpr int PIXELS_PER_METTER{100};
 constexpr int MARGIN{24};
+constexpr int PADDLE_MARGIN{MARGIN * 3};
 
 namespace paddle
 {

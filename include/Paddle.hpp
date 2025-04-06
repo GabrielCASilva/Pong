@@ -20,6 +20,9 @@ class Paddle
     auto Draw() const -> void;
     auto StayOnScreen() -> void;
 
+    [[nodiscard]] auto getSize() const -> Size;
+    [[nodiscard]] auto getPosition() const -> Vector2;
+
   private:
     Vector2 position;
     Size size;
