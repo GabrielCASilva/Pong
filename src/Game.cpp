@@ -21,11 +21,10 @@ Game::Game(int width, int height, const std::string &title)
     const Vector2 player_pos{pong::PADDLE_MARGIN, paddle_height};
     player = std::make_unique<Player>(player_pos, size);
 
-    // TODO: Enemy paddle
-    Size _size{.width = pong::paddle::WIDTH, .height = pong::paddle::HEIGHT * 2};
-    float _paddle_height = middle_height - (static_cast<float>(_size.height) / 2);
-    const Vector2 enemy_position{pong::WINDOW_WIDTH - (pong::PADDLE_MARGIN * 4), _paddle_height};
-    enemy = std::make_unique<Enemy>(enemy_position, _size);
+    // Enemy paddle
+    const Vector2 enemy_position{pong::WINDOW_WIDTH - pong::PADDLE_MARGIN - static_cast<float>(size.width),
+                                 paddle_height};
+    enemy = std::make_unique<Enemy>(enemy_position, size);
 
     // Ball
     auto middle_width{static_cast<float>(pong::WINDOW_WIDTH) / 2};
