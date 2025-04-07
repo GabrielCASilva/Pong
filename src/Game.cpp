@@ -1,5 +1,6 @@
 #include "Game.hpp"
 #include "Constants.hpp"
+#include "Enemy.hpp"
 #include "Player.hpp"
 #include "Size.hpp"
 #include <cassert>
@@ -21,6 +22,10 @@ Game::Game(int width, int height, const std::string &title)
     player = std::make_unique<Player>(player_pos, size);
 
     // TODO: Enemy paddle
+    Size _size{.width = pong::paddle::WIDTH, .height = pong::paddle::HEIGHT * 2};
+    float _paddle_height = middle_height - (static_cast<float>(_size.height) / 2);
+    const Vector2 enemy_position{pong::WINDOW_WIDTH - (pong::PADDLE_MARGIN * 4), _paddle_height};
+    enemy = std::make_unique<Enemy>(enemy_position, _size);
 
     // Ball
     auto middle_width{static_cast<float>(pong::WINDOW_WIDTH) / 2};
@@ -50,7 +55,8 @@ auto Game::Update() -> void
     float delta_time = GetFrameTime();
     player->Loop(delta_time);
     ball->Loop(delta_time);
-    ball->BouceOnPaddle(*player, -1);
+    ball->BounceOnPaddle(*player);
+    ball->BounceOnPaddle(*enemy);
     ball->StayOnScreen();
 }
 
@@ -61,6 +67,7 @@ auto Game::Draw() const -> void
     ClearBackground(BLACK);
 
     player->Draw();
+    enemy->Draw();
     ball->Draw();
 
     EndDrawing();

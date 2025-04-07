@@ -11,7 +11,7 @@ class Ball
     auto Loop(float deltaTime) -> void;
     auto Draw() const -> void;
     auto StayOnScreen() -> void;
-    auto BouceOnPaddle(const Paddle &paddle, int sign) -> void;
+    auto BounceOnPaddle(const Paddle &paddle) -> void;
 
   private:
     float acceleration{};

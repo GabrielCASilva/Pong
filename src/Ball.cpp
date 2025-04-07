@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
+#include <iostream>
 #include <raylib.h>
 
 Ball::Ball(Vector2 position, float radius)
@@ -68,41 +69,63 @@ auto Ball::ChangeDirectionRandom() -> void
     direction.y = std::sin(angle);
 }
 
-auto Ball::BouceOnPaddle(const Paddle &paddle, int sign) -> void
+auto Ball::BounceOnPaddle(const Paddle &paddle) -> void
 {
-    Size p_size = paddle.getSize();
-    Vector2 p_pos = paddle.getPosition();
+    // get paddle position / size
+    Vector2 paddle_position{paddle.getPosition()};
+    Size paddle_size{paddle.getSize()};
 
-    float _radius = radius * static_cast<float>(sign);
-    bool collision_h1 = position.y + _radius >= p_pos.y;
-    bool collision_h2 = position.y + _radius <= p_pos.y + static_cast<float>(p_size.height);
-    bool collision_h = collision_h1 && collision_h2;
+    // alinha a posicao para o meio do paddle
+    auto p_width{static_cast<float>(paddle_size.width)};
+    auto p_height{static_cast<float>(paddle_size.height)};
+    Vector2 paddle_position_middle{Vector2{paddle_position.x + (p_width / 2), paddle_position.y + (p_height / 2)}};
 
-    bool collision_w1 = position.x + _radius >= p_pos.x;
-    bool collision_w2 = position.x + _radius <= p_pos.x + static_cast<float>(p_size.width);
-    bool collision_w = collision_w1 && collision_w2;
-
-    if (collision_h && collision_w)
+    Vector2 distance_paddle_ball{Vector2{0, 0}};
+    if (position.x >= paddle_position_middle.x)
     {
-        direction.x *= -1;
-        velocity.x *= -1;
+        // distancia = bola - paddle
+        distance_paddle_ball.x = (position.x - radius) - (paddle_position_middle.x + (p_width / 2));
+    }
+    else
+    {
+        // distancia = paddle - bola
+        distance_paddle_ball.x = (paddle_position_middle.x - (p_width / 2)) - (position.x + radius);
+    }
 
-        // descobrindo onde a bola colidiu em relação ao eixo y
-        float _p_height = static_cast<float>(p_size.height) / 2;
-        float ball_collide = position.y - (p_pos.y + _p_height);
+    if (position.y >= paddle_position_middle.y)
+    {
+        // distancia = bola - paddle
+        distance_paddle_ball.y = (position.y - radius) - (paddle_position_middle.y + (p_height / 2));
+    }
+    else
+    {
+        // distancia = paddle - bola
+        distance_paddle_ball.y = (paddle_position_middle.y - (p_height / 2)) - (position.y + radius);
+    }
 
-        // normaliza o valor para ver se ele bateu no centro, em cima ou em baixo
-        float normalized = ball_collide / _p_height;
-        normalized = std::clamp(normalized, -1.0F, 1.0F);
+    // Colidiu! Bola com Paddle
+    if (distance_paddle_ball.x < 0 && distance_paddle_ball.y < 0)
+    {
+        float overlap_left = (position.x + radius) - (paddle_position_middle.x - (p_width / 2));
+        float overlap_right = (paddle_position_middle.x + (p_width / 2)) - (position.x - radius);
+        float overlap_top = (position.y + radius) - (paddle_position_middle.y - (p_height / 2));
+        float overlap_bottom = (paddle_position_middle.y + (p_height / 2)) - (position.y - radius);
 
-        const int RANGE = 31;
-        const int _180 = 180;
-        int random_number = (std::rand() % RANGE) + (RANGE - 1);
-        float max_angle = static_cast<float>(random_number) * (PI / _180);
-        float bounce_angle = normalized * max_angle;
+        float min_overlap_x = std::min(overlap_left, overlap_right);
+        float min_overlap_y = std::min(overlap_top, overlap_bottom);
 
-        direction.x = std::cos(bounce_angle);
-        direction.y = std::sin(bounce_angle);
+        if (min_overlap_x < min_overlap_y)
+        {
+            direction.x *= -1;
+            velocity.x *= -1;
+            ChangeDirectionRandom();
+        }
+        else
+        {
+            direction.y *= -1;
+            velocity.y *= -1;
+            ChangeDirectionRandom();
+        }
     }
 }
 

@@ -21,6 +21,8 @@ class Paddle
     auto StayOnScreen() -> void;
 
     [[nodiscard]] auto getSize() const -> Size;
+    // [[nodiscard]] -> fala para o programador que, se ele não está usando o retorno, está usando o método
+    // de maneira errada
     [[nodiscard]] auto getPosition() const -> Vector2;
 
   private:

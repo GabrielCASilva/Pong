@@ -2,6 +2,7 @@
 #define GAME_HPP
 
 #include "Ball.hpp"
+#include "Enemy.hpp"
 #include "Player.hpp"
 #include <memory>
 #include <string>
@@ -25,5 +26,6 @@ class Game
 
     std::unique_ptr<Player> player;
     std::unique_ptr<Ball> ball;
+    std::unique_ptr<Enemy> enemy;
 };
 #endif // !GAME_HPP

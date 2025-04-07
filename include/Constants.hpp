@@ -23,4 +23,5 @@ namespace ball
 constexpr int RADIUS{8};
 }
 } // namespace pong
+
 #endif // !CONSTANTS_HPP
