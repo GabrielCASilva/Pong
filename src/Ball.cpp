@@ -5,7 +5,6 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
-#include <iostream>
 #include <raylib.h>
 
 Ball::Ball(Vector2 position, float radius)
