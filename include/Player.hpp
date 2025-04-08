@@ -9,6 +9,6 @@ class Player : public Paddle
 {
   public:
     Player(Vector2 position, Size size);
-    auto moviment() -> float override;
+    auto Loop(float delta_time) -> void override;
 };
 #endif // !PLAYER_HPP

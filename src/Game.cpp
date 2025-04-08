@@ -52,11 +52,16 @@ auto Game::Tick() -> void
 auto Game::Update() -> void
 {
     float delta_time = GetFrameTime();
+
     player->Loop(delta_time);
+
     ball->Loop(delta_time);
     ball->BounceOnPaddle(*player);
     ball->BounceOnPaddle(*enemy);
     ball->StayOnScreen();
+
+    enemy->SetBall(ball.get());
+    enemy->Loop(delta_time);
 }
 
 auto Game::Draw() const -> void

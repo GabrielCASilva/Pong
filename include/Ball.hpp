@@ -13,6 +13,9 @@ class Ball
     auto StayOnScreen() -> void;
     auto BounceOnPaddle(const Paddle &paddle) -> void;
 
+    [[nodiscard]] auto GetVelocity() const -> Vector2;
+    [[nodiscard]] auto GetPosition() const -> Vector2;
+
   private:
     float acceleration{};
     Vector2 position;

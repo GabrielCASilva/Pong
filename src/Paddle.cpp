@@ -8,14 +8,6 @@ Paddle::Paddle(Vector2 position, Size size) : position(position), size(size), ve
 {
 }
 
-auto Paddle::Loop(float deltaTime) -> void
-{
-    acceleration = moviment();
-    acceleration *= pong::paddle::ACC;
-    Integrate(deltaTime);
-    StayOnScreen();
-}
-
 auto Paddle::StayOnScreen() -> void
 {
     auto sup_margin = static_cast<float>(pong::MARGIN);

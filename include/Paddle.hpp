@@ -14,9 +14,8 @@ class Paddle
     auto operator=(Paddle &&) -> Paddle & = delete;      // Atribuição por movimento
 
     virtual ~Paddle() = default; // Destruidor virtual
-    virtual auto moviment() -> float = 0;
+    virtual auto Loop(float delta_time) -> void = 0;
 
-    auto Loop(float deltaTime) -> void;
     auto Draw() const -> void;
     auto StayOnScreen() -> void;
 
@@ -25,7 +24,7 @@ class Paddle
     // de maneira errada
     [[nodiscard]] auto getPosition() const -> Vector2;
 
-  private:
+  protected:
     Vector2 position;
     Size size;
     Vector2 velocity;

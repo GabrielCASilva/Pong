@@ -4,6 +4,7 @@
 #include "Size.hpp"
 #include <algorithm>
 #include <cmath>
+#include <cstdarg>
 #include <cstdlib>
 #include <raylib.h>
 
@@ -14,6 +15,7 @@ Ball::Ball(Vector2 position, float radius)
 
 auto Ball::Loop(float deltaTime) -> void
 {
+
     const float max_acc = 20.F;
     acceleration = max_acc;
 
@@ -115,12 +117,32 @@ auto Ball::BounceOnPaddle(const Paddle &paddle) -> void
 
         if (min_overlap_x < min_overlap_y)
         {
+            // corrigindo a posicao da bola
+            if (overlap_left < overlap_right)
+            {
+                position.x -= overlap_left - 1;
+            }
+            else
+            {
+                position.x += overlap_right + 1;
+            }
+
             direction.x *= -1;
             velocity.x *= -1;
             ChangeDirectionRandom();
         }
         else
         {
+            // corrigindo a posicao da bola
+            if (overlap_top < overlap_bottom)
+            {
+                position.y -= overlap_top - 1;
+            }
+            else
+            {
+                position.y += overlap_bottom + 1;
+            }
+
             direction.y *= -1;
             velocity.y *= -1;
             ChangeDirectionRandom();
@@ -157,4 +179,14 @@ auto Ball::Position(float deltaTime) -> void
 {
     position.x += velocity.x * deltaTime;
     position.y += velocity.y * deltaTime;
+}
+
+auto Ball::GetVelocity() const -> Vector2
+{
+    return velocity;
+}
+
+auto Ball::GetPosition() const -> Vector2
+{
+    return position;
 }
