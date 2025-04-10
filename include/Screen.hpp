@@ -1,6 +1,8 @@
 #ifndef SCREEN_HPP
 #define SCREEN_HPP
 
+#include "ScreenType.hpp"
+#include <optional>
 class Screen
 {
   public:
@@ -16,6 +18,8 @@ class Screen
     virtual auto Update(float delta_time) -> void = 0;
     virtual auto Draw() const -> void = 0;
     virtual auto Exit() -> void = 0;
+
+    [[nodiscard]] virtual auto NextScreen() const -> std::optional<ScreenType> = 0;
 };
 
 #endif // !SCREEN_HPP

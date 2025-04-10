@@ -1,9 +1,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "Ball.hpp"
-#include "Enemy.hpp"
-#include "Player.hpp"
+#include "ScreenManager.hpp"
 #include <memory>
 #include <string>
 
@@ -24,8 +22,6 @@ class Game
     auto Draw() const -> void;
     auto Update() -> void;
 
-    std::unique_ptr<Player> player;
-    std::unique_ptr<Ball> ball;
-    std::unique_ptr<Enemy> enemy;
+    std::unique_ptr<ScreenManager> screen_manager;
 };
 #endif // !GAME_HPP

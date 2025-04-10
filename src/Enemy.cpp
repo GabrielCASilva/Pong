@@ -29,7 +29,7 @@ auto Enemy::Loop(float delta_time) -> void
         Vector2 center_pos{Vector2{position.x + (width / 2), position.y + (height / 2)}};
 
         float dist_y{b_future_pos_y - center_pos.y};
-        const float dead_zone = 5.0F;
+        const float dead_zone = static_cast<float>(pong::paddle::HEIGHT) / 3;
         if (std::abs(dist_y) < dead_zone)
         {
             acceleration = 0;
@@ -37,8 +37,7 @@ auto Enemy::Loop(float delta_time) -> void
         else
         {
             float middle_width = static_cast<float>(pong::WINDOW_WIDTH) / 2;
-            const float start_see_ball{middle_width - 200};
-            if (b_pos.x > start_see_ball && b_vel.x > 0)
+            if (b_vel.x > 0)
             {
                 const int inpult_dist{200};
                 if (std::abs(dist_y) > inpult_dist)

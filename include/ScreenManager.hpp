@@ -15,7 +15,7 @@ class ScreenManager
   private:
     std::unique_ptr<Screen> current_screen;
     ScreenType current_type;
-    auto CreateScreen(ScreenType type) -> std::unique_ptr<Screen>;
+    static auto CreateScreen(ScreenType type) -> std::unique_ptr<Screen>;
 };
 
 #endif // !SCREEN_MANAGER_HPP
