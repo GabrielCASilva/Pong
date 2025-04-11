@@ -6,6 +6,7 @@
 #include <cassert>
 #include <memory>
 #include <raylib.h>
+#include <string>
 
 auto GameScreen::Init() -> void
 {
@@ -40,10 +41,34 @@ auto GameScreen::Update(float delta_time) -> void
 
     enemy->SetBall(ball.get());
     enemy->Loop(delta_time);
+
+    if (ball->GetPosition().x <= -24)
+    {
+        enemy_points++;
+        ball->Reset();
+        ball->SetDirection(Vector2{-1, 0});
+    }
+
+    if (ball->GetPosition().x >= pong::WINDOW_WIDTH + 24)
+    {
+        player_points++;
+        ball->Reset();
+        ball->SetDirection(Vector2{1, 0});
+    }
 }
 
 auto GameScreen::Draw() const -> void
 {
+    std::string player_points_str{std::to_string(player_points)};
+    DrawText(player_points_str.c_str(), (pong::WINDOW_WIDTH / 2) - 80, pong::MARGIN, 40, WHITE);
+
+    std::string enemy_points_str{std::to_string(enemy_points)};
+    DrawText(enemy_points_str.c_str(), (pong::WINDOW_WIDTH / 2) + 60, pong::MARGIN, 40, WHITE);
+
+    DrawRectangle((pong::WINDOW_WIDTH / 2) - 5, 0, 10, pong::WINDOW_HEIGHT, DARKBLUE);
+
+    DrawRectangleLinesEx(Rectangle{0, 0, pong::WINDOW_WIDTH, pong::WINDOW_HEIGHT}, 10, DARKBLUE);
+
     player->Draw();
     enemy->Draw();
     ball->Draw();

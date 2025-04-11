@@ -35,16 +35,17 @@ auto Ball::Draw() const -> void
 
 auto Ball::StayOnScreen() -> void
 {
-    const auto min_pos_x{static_cast<float>(pong::ball::RADIUS)};
-    const auto max_pos_x{static_cast<float>(pong::WINDOW_WIDTH - pong::ball::RADIUS)};
-    position.x = std::clamp(position.x, min_pos_x, max_pos_x);
-    if (position.x >= max_pos_x || position.x <= min_pos_x)
-    {
-        direction.x *= -1;
-        velocity.x *= -1;
-        ChangeDirectionRandom();
-    }
-
+    /*
+      const auto min_pos_x{static_cast<float>(pong::ball::RADIUS)};
+      const auto max_pos_x{static_cast<float>(pong::WINDOW_WIDTH - pong::ball::RADIUS)};
+      position.x = std::clamp(position.x, min_pos_x, max_pos_x);
+      if (position.x >= max_pos_x || position.x <= min_pos_x)
+      {
+          direction.x *= -1;
+          velocity.x *= -1;
+          ChangeDirectionRandom();
+      }
+  */
     const auto min_pos_y{static_cast<float>(pong::ball::RADIUS + pong::MARGIN)};
     const auto max_pos_y{static_cast<float>(pong::WINDOW_HEIGHT - pong::ball::RADIUS - pong::MARGIN)};
     position.y = std::clamp(position.y, min_pos_y, max_pos_y);
@@ -167,6 +168,19 @@ auto Ball::ClampMagnitude(Vector2 vec, float max_len) -> Vector2
         vec.y = vec.y / mag * max_len;
     }
     return vec;
+}
+
+auto Ball::Reset() -> void
+{
+    auto middle_height = static_cast<float>(pong::WINDOW_HEIGHT) / 2;
+    auto middle_width{static_cast<float>(pong::WINDOW_WIDTH) / 2};
+    position = Vector2{middle_width - pong::ball::RADIUS, middle_height};
+    velocity = Vector2{0, 0};
+}
+
+auto Ball::SetDirection(Vector2 direction) -> void
+{
+    this->direction = direction;
 }
 
 auto Ball::Velocity(float deltaTime) -> void

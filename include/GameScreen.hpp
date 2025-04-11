@@ -14,6 +14,9 @@ class GameScreen : public Screen
     std::unique_ptr<Ball> ball;
     std::unique_ptr<Enemy> enemy;
 
+    int player_points{};
+    int enemy_points{};
+
   public:
     auto Init() -> void final;
     auto Update(float delta_time) -> void final;

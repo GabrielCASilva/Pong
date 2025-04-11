@@ -12,6 +12,8 @@ class Ball
     auto Draw() const -> void;
     auto StayOnScreen() -> void;
     auto BounceOnPaddle(const Paddle &paddle) -> void;
+    auto Reset() -> void;
+    auto SetDirection(Vector2 direction) -> void;
 
     [[nodiscard]] auto GetVelocity() const -> Vector2;
     [[nodiscard]] auto GetPosition() const -> Vector2;

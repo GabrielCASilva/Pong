@@ -18,7 +18,8 @@ auto MenuScreen::Update(float delta_time) -> void
 
 auto MenuScreen::Draw() const -> void
 {
-    DrawText("MenuScreen", (pong::WINDOW_WIDTH / 2) - 70, (pong::WINDOW_HEIGHT / 2) - 10, 20, WHITE);
+    DrawText("MAIN MENU", (pong::WINDOW_WIDTH / 2) - 140, (pong::WINDOW_HEIGHT / 2) - 80, 50, WHITE);
+    DrawText("Press enter to start", (pong::WINDOW_WIDTH / 2) - 160, (pong::WINDOW_HEIGHT / 2), 30, WHITE);
 }
 
 auto MenuScreen::Exit() -> void

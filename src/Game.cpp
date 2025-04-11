@@ -10,7 +10,7 @@ Game::Game(int width, int height, const std::string &title)
     assert(!GetWindowHandle());
     InitWindow(width, height, title.c_str());
     screen_manager = std::make_unique<ScreenManager>();
-    screen_manager->ChangeScreen(ScreenType::MAIN_MENU);
+    screen_manager->ChangeScreen(ScreenType::GAME);
 }
 
 Game::~Game() noexcept

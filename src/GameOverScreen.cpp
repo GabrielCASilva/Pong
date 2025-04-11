@@ -14,7 +14,7 @@ auto GameOverScreen::Update(float delta_time) -> void
 
 auto GameOverScreen::Draw() const -> void
 {
-    DrawText("GameOverScreen", pong::WINDOW_WIDTH / 2, pong::WINDOW_HEIGHT / 2, 20, WHITE);
+    DrawText("Game Over", pong::WINDOW_WIDTH / 2, pong::WINDOW_HEIGHT / 2, 20, WHITE);
 }
 
 auto GameOverScreen::Exit() -> void
