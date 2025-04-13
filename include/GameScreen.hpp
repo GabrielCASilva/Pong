@@ -17,6 +17,14 @@ class GameScreen : public Screen
     int player_points{};
     int enemy_points{};
 
+    int timer_r{3};
+    float timer{3.0F};
+    bool init_timer{false};
+
+    // IU
+    const int max_brightness{255};
+    int brightness{max_brightness};
+
   public:
     auto Init() -> void final;
     auto Update(float delta_time) -> void final;

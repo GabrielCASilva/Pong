@@ -174,7 +174,7 @@ auto Ball::Reset() -> void
 {
     auto middle_height = static_cast<float>(pong::WINDOW_HEIGHT) / 2;
     auto middle_width{static_cast<float>(pong::WINDOW_WIDTH) / 2};
-    position = Vector2{middle_width - pong::ball::RADIUS, middle_height};
+    position = Vector2{middle_width, middle_height};
     velocity = Vector2{0, 0};
 }
 

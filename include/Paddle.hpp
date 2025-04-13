@@ -18,6 +18,7 @@ class Paddle
 
     auto Draw() const -> void;
     auto StayOnScreen() -> void;
+    auto Reset() -> void;
 
     [[nodiscard]] auto getSize() const -> Size;
     // [[nodiscard]] -> fala para o programador que, se ele não está usando o retorno, está usando o método
@@ -31,5 +32,8 @@ class Paddle
     float acceleration{0};
 
     auto Integrate(float deltaTime) -> void;
+
+  private:
+    Vector2 initial_pos;
 };
 #endif // !PADDLE_HPP

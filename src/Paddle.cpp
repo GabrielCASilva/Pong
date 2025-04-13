@@ -4,7 +4,8 @@
 #include <algorithm>
 #include <raylib.h>
 
-Paddle::Paddle(Vector2 position, Size size) : position(position), size(size), velocity({.x = 0, .y = 0})
+Paddle::Paddle(Vector2 position, Size size)
+    : position(position), size(size), velocity({.x = 0, .y = 0}), initial_pos(position)
 {
 }
 
@@ -37,6 +38,12 @@ auto Paddle::Integrate(float deltaTime) -> void
         velocity.y = std::clamp(velocity.y, -pong::paddle::MAX_VEL, pong::paddle::MAX_VEL);
     }
     position.y += velocity.y * deltaTime;
+}
+
+auto Paddle::Reset() -> void
+{
+    position.x = initial_pos.x;
+    position.y = initial_pos.y;
 }
 
 auto Paddle::Draw() const -> void

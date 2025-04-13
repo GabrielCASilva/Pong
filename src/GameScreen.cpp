@@ -4,6 +4,8 @@
 #include "Player.hpp"
 #include "Size.hpp"
 #include <cassert>
+#include <cmath>
+#include <iostream>
 #include <memory>
 #include <raylib.h>
 #include <string>
@@ -26,12 +28,41 @@ auto GameScreen::Init() -> void
 
     // Ball
     auto middle_width{static_cast<float>(pong::WINDOW_WIDTH) / 2};
-    const Vector2 ball_position{middle_width - pong::ball::RADIUS, middle_height};
+    const Vector2 ball_position{middle_width, middle_height};
     ball = std::make_unique<Ball>(ball_position, pong::ball::RADIUS);
 }
 
 auto GameScreen::Update(float delta_time) -> void
 {
+    if (init_timer)
+    {
+        if (timer >= 0)
+        {
+            timer -= delta_time;
+
+            if (static_cast<float>(timer_r) >= timer)
+            {
+                brightness = max_brightness;
+                timer_r = static_cast<int>(timer);
+            }
+            else
+            {
+                if (brightness > 0)
+                {
+                    brightness -= 5;
+                }
+            }
+        }
+        else
+        {
+            init_timer = false;
+            timer = 3.0F;
+            timer_r = 3;
+        }
+
+        return;
+    }
+
     player->Loop(delta_time);
 
     ball->Loop(delta_time);
@@ -45,15 +76,21 @@ auto GameScreen::Update(float delta_time) -> void
     if (ball->GetPosition().x <= -24)
     {
         enemy_points++;
-        ball->Reset();
         ball->SetDirection(Vector2{-1, 0});
+        ball->Reset();
+        player->Reset();
+        enemy->Reset();
+        init_timer = true;
     }
 
     if (ball->GetPosition().x >= pong::WINDOW_WIDTH + 24)
     {
         player_points++;
-        ball->Reset();
         ball->SetDirection(Vector2{1, 0});
+        ball->Reset();
+        player->Reset();
+        enemy->Reset();
+        init_timer = true;
     }
 }
 
@@ -72,6 +109,20 @@ auto GameScreen::Draw() const -> void
     player->Draw();
     enemy->Draw();
     ball->Draw();
+
+    if (init_timer)
+    {
+
+        DrawRectangle(pong::WINDOW_WIDTH / 2 - 50, pong::WINDOW_HEIGHT / 2 - 155, 100, 100, DARKBLUE);
+
+        auto timer_i{static_cast<int>(floor(timer))};
+        std::string counter = timer_i > 0 ? std::to_string(timer_i) : "0";
+
+        const int max_c{255};
+        int width = MeasureText(counter.c_str(), 80);
+        Color counter_color = (Color){max_c, max_c, max_c, static_cast<unsigned char>(brightness)};
+        DrawText(counter.c_str(), pong::WINDOW_WIDTH / 2 - width / 2, pong::WINDOW_HEIGHT / 2 - 140, 80, counter_color);
+    }
 }
 
 auto GameScreen::Exit() -> void
