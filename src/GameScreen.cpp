@@ -5,6 +5,7 @@
 #include "Size.hpp"
 #include <cassert>
 #include <cmath>
+#include <cstdlib>
 #include <iostream>
 #include <memory>
 #include <raylib.h>
@@ -34,6 +35,11 @@ auto GameScreen::Init() -> void
 
 auto GameScreen::Update(float delta_time) -> void
 {
+    if (game_over)
+    {
+        return;
+    }
+
     if (init_timer)
     {
         if (timer >= 0)
@@ -92,6 +98,35 @@ auto GameScreen::Update(float delta_time) -> void
         enemy->Reset();
         init_timer = true;
     }
+
+    if (!match_point && (player_points >= match_pointer_param || enemy_points >= match_pointer_param) &&
+        (player_points == enemy_points))
+    {
+        match_point = true;
+    }
+
+    if (match_point)
+    {
+        ++winner_points;
+        ++match_pointer_param;
+        match_point = false;
+    }
+
+    if (player_points >= winner_points || enemy_points >= winner_points)
+    {
+        game_over = true;
+        std::cout << "Partida acaba\n";
+
+        if (player_points > enemy_points)
+        {
+            std::cout << "Player ganhou\n";
+        }
+
+        if (enemy_points > player_points)
+        {
+            std::cout << "Inimigo ganhou\n";
+        }
+    }
 }
 
 auto GameScreen::Draw() const -> void
@@ -112,16 +147,19 @@ auto GameScreen::Draw() const -> void
 
     if (init_timer)
     {
-
         DrawRectangle(pong::WINDOW_WIDTH / 2 - 50, pong::WINDOW_HEIGHT / 2 - 155, 100, 100, DARKBLUE);
 
         auto timer_i{static_cast<int>(floor(timer))};
         std::string counter = timer_i > 0 ? std::to_string(timer_i) : "0";
 
-        const int max_c{255};
-        int width = MeasureText(counter.c_str(), 80);
-        Color counter_color = (Color){max_c, max_c, max_c, static_cast<unsigned char>(brightness)};
-        DrawText(counter.c_str(), pong::WINDOW_WIDTH / 2 - width / 2, pong::WINDOW_HEIGHT / 2 - 140, 80, counter_color);
+        if (timer_i >= 0)
+        {
+            const int max_c{255};
+            int width = MeasureText(counter.c_str(), 80);
+            Color counter_color = (Color){max_c, max_c, max_c, static_cast<unsigned char>(brightness)};
+            DrawText(counter.c_str(), pong::WINDOW_WIDTH / 2 - width / 2, pong::WINDOW_HEIGHT / 2 - 140, 80,
+                     counter_color);
+        }
     }
 }
 

@@ -25,6 +25,12 @@ class GameScreen : public Screen
     const int max_brightness{255};
     int brightness{max_brightness};
 
+    // Condição para fim de jogo
+    int match_pointer_param{2};
+    int winner_points{3};
+    bool match_point{false};
+    bool game_over{false};
+
   public:
     auto Init() -> void final;
     auto Update(float delta_time) -> void final;
