@@ -1,6 +1,8 @@
 #include "GameOverScreen.hpp"
 #include "Constants.hpp"
+#include "GameState.hpp"
 #include "ScreenType.hpp"
+#include <iostream>
 #include <optional>
 #include <raylib.h>
 
@@ -8,8 +10,16 @@ auto GameOverScreen::Init() -> void
 {
 }
 
-auto GameOverScreen::Update(float delta_time) -> void
+auto GameOverScreen::Update(float delta_time, GameState &game_state) -> void
 {
+    if (game_state.player_points > game_state.enemy_points)
+    {
+        std::cout << "Jogador ganhou\n";
+    }
+    else
+    {
+        std::cout << "Inimigo ganhou\n";
+    }
 }
 
 auto GameOverScreen::Draw() const -> void

@@ -1,6 +1,7 @@
 #ifndef SCREEN_HPP
 #define SCREEN_HPP
 
+#include "GameState.hpp"
 #include "ScreenType.hpp"
 #include <optional>
 class Screen
@@ -15,7 +16,7 @@ class Screen
     auto operator=(Screen &&) -> Screen & = delete;      // Atribuição por movimento
 
     virtual auto Init() -> void = 0;
-    virtual auto Update(float delta_time) -> void = 0;
+    virtual auto Update(float delta_time, GameState &game_state) -> void = 0;
     virtual auto Draw() const -> void = 0;
     virtual auto Exit() -> void = 0;
 

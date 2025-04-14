@@ -33,7 +33,7 @@ auto Game::Tick() -> void
 auto Game::Update() -> void
 {
     float delta_time = GetFrameTime();
-    screen_manager->Update(delta_time);
+    screen_manager->Update(delta_time, game_state);
 }
 
 auto Game::Draw() const -> void

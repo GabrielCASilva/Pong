@@ -1,6 +1,7 @@
 #include "ScreenManager.hpp"
 #include "GameOverScreen.hpp"
 #include "GameScreen.hpp"
+#include "GameState.hpp"
 #include "MenuScreen.hpp"
 #include "ScreenType.hpp"
 #include <memory>
@@ -21,11 +22,11 @@ auto ScreenManager::ChangeScreen(ScreenType new_type) -> void
     }
 }
 
-auto ScreenManager::Update(float delta_time) -> void
+auto ScreenManager::Update(float delta_time, GameState &game_state) -> void
 {
     if (current_screen)
     {
-        current_screen->Update(delta_time);
+        current_screen->Update(delta_time, game_state);
 
         if (auto next = current_screen->NextScreen(); next.has_value())
         {

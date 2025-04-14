@@ -1,6 +1,7 @@
 #include "GameScreen.hpp"
 #include "Constants.hpp"
 #include "Enemy.hpp"
+#include "GameState.hpp"
 #include "Player.hpp"
 #include "Size.hpp"
 #include <cassert>
@@ -33,7 +34,7 @@ auto GameScreen::Init() -> void
     ball = std::make_unique<Ball>(ball_position, pong::ball::RADIUS);
 }
 
-auto GameScreen::Update(float delta_time) -> void
+auto GameScreen::Update(float delta_time, GameState &game_state) -> void
 {
     if (game_over)
     {
@@ -82,6 +83,7 @@ auto GameScreen::Update(float delta_time) -> void
     if (ball->GetPosition().x <= -24)
     {
         enemy_points++;
+        game_state.enemy_points = enemy_points;
         ball->SetDirection(Vector2{-1, 0});
         ball->Reset();
         player->Reset();
@@ -92,6 +94,7 @@ auto GameScreen::Update(float delta_time) -> void
     if (ball->GetPosition().x >= pong::WINDOW_WIDTH + 24)
     {
         player_points++;
+        game_state.player_points = player_points;
         ball->SetDirection(Vector2{1, 0});
         ball->Reset();
         player->Reset();
@@ -169,5 +172,9 @@ auto GameScreen::Exit() -> void
 
 auto GameScreen::NextScreen() const -> std::optional<ScreenType>
 {
+    if (game_over)
+    {
+        return ScreenType::GAME_OVER;
+    }
     return std::nullopt;
 }

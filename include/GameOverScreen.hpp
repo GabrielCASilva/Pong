@@ -7,7 +7,7 @@ class GameOverScreen : public Screen
 {
   public:
     auto Init() -> void final;
-    auto Update(float delta_time) -> void final;
+    auto Update(float delta_time, GameState &game_state) -> void final;
     auto Draw() const -> void final;
     auto Exit() -> void final;
 

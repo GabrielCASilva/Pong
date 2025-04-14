@@ -3,6 +3,7 @@
 
 #include "Ball.hpp"
 #include "Enemy.hpp"
+#include "GameState.hpp"
 #include "Player.hpp"
 #include "Screen.hpp"
 #include <memory>
@@ -33,7 +34,7 @@ class GameScreen : public Screen
 
   public:
     auto Init() -> void final;
-    auto Update(float delta_time) -> void final;
+    auto Update(float delta_time, GameState &game_state) -> void final;
     auto Draw() const -> void final;
     auto Exit() -> void final;
 

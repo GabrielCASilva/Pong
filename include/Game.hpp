@@ -1,6 +1,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+#include "GameState.hpp"
 #include "ScreenManager.hpp"
 #include <memory>
 #include <string>
@@ -22,6 +23,7 @@ class Game
     auto Draw() const -> void;
     auto Update() -> void;
 
+    GameState game_state{};
     std::unique_ptr<ScreenManager> screen_manager;
 };
 #endif // !GAME_HPP

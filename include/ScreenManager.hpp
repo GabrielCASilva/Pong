@@ -1,6 +1,7 @@
 #ifndef SCREEN_MANAGER_HPP
 #define SCREEN_MANAGER_HPP
 
+#include "GameState.hpp"
 #include "Screen.hpp"
 #include "ScreenType.hpp"
 #include <memory>
@@ -9,7 +10,7 @@ class ScreenManager
 {
   public:
     auto ChangeScreen(ScreenType new_type) -> void;
-    auto Update(float delta_time) -> void;
+    auto Update(float delta_time, GameState &game_state) -> void;
     auto Draw() const -> void;
 
   private:

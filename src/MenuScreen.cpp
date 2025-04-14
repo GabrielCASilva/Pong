@@ -1,5 +1,6 @@
 #include "MenuScreen.hpp"
 #include "Constants.hpp"
+#include "GameState.hpp"
 #include "ScreenType.hpp"
 #include <optional>
 #include <raylib.h>
@@ -8,7 +9,7 @@ auto MenuScreen::Init() -> void
 {
 }
 
-auto MenuScreen::Update(float delta_time) -> void
+auto MenuScreen::Update(float delta_time, GameState &game_state) -> void
 {
     if (IsKeyPressed(KEY_ENTER))
     {
