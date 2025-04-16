@@ -4,6 +4,7 @@
 #include "GameState.hpp"
 #include "Player.hpp"
 #include "Size.hpp"
+#include "Visuals.hpp"
 #include <cassert>
 #include <cmath>
 #include <cstdlib>
@@ -134,15 +135,12 @@ auto GameScreen::Update(float delta_time, GameState &game_state) -> void
 
 auto GameScreen::Draw() const -> void
 {
+    Visuals::GameBackground();
     std::string player_points_str{std::to_string(player_points)};
     DrawText(player_points_str.c_str(), (pong::WINDOW_WIDTH / 2) - 80, pong::MARGIN, 40, WHITE);
 
     std::string enemy_points_str{std::to_string(enemy_points)};
     DrawText(enemy_points_str.c_str(), (pong::WINDOW_WIDTH / 2) + 60, pong::MARGIN, 40, WHITE);
-
-    DrawRectangle((pong::WINDOW_WIDTH / 2) - 5, 0, 10, pong::WINDOW_HEIGHT, DARKBLUE);
-
-    DrawRectangleLinesEx(Rectangle{0, 0, pong::WINDOW_WIDTH, pong::WINDOW_HEIGHT}, 10, DARKBLUE);
 
     player->Draw();
     enemy->Draw();
