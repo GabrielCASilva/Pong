@@ -73,6 +73,7 @@ auto Ball::ChangeDirectionRandom() -> void
 
 auto Ball::BounceOnPaddle(const Paddle &paddle) -> void
 {
+    is_colliding_paddle = false;
     // get paddle position / size
     Vector2 paddle_position{paddle.getPosition()};
     Size paddle_size{paddle.getSize()};
@@ -108,6 +109,8 @@ auto Ball::BounceOnPaddle(const Paddle &paddle) -> void
     // Colidiu! Bola com Paddle
     if (distance_paddle_ball.x < 0 && distance_paddle_ball.y < 0)
     {
+        is_colliding_paddle = true;
+        // tocar audio
         float overlap_left = (position.x + radius) - (paddle_position_middle.x - (p_width / 2));
         float overlap_right = (paddle_position_middle.x + (p_width / 2)) - (position.x - radius);
         float overlap_top = (position.y + radius) - (paddle_position_middle.y - (p_height / 2));

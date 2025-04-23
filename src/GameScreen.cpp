@@ -7,7 +7,6 @@
 #include "Visuals.hpp"
 #include <cassert>
 #include <cmath>
-#include <cstdlib>
 #include <iostream>
 #include <memory>
 #include <raylib.h>
@@ -16,6 +15,8 @@
 auto GameScreen::Init() -> void
 {
     Size size{.width = pong::paddle::WIDTH, .height = pong::paddle::HEIGHT};
+
+    fx_ball = LoadSound("assets/pong.wav");
 
     // Player paddle
     auto middle_height = static_cast<float>(pong::WINDOW_HEIGHT) / 2;
@@ -75,7 +76,15 @@ auto GameScreen::Update(float delta_time, GameState &game_state) -> void
 
     ball->Loop(delta_time);
     ball->BounceOnPaddle(*player);
+    if (ball->is_colliding_paddle)
+    {
+        PlaySound(fx_ball);
+    }
     ball->BounceOnPaddle(*enemy);
+    if (ball->is_colliding_paddle)
+    {
+        PlaySound(fx_ball);
+    }
     ball->StayOnScreen();
 
     enemy->SetBall(ball.get());
@@ -166,6 +175,7 @@ auto GameScreen::Draw() const -> void
 
 auto GameScreen::Exit() -> void
 {
+    UnloadSound(fx_ball); // Unload sound data
 }
 
 auto GameScreen::NextScreen() const -> std::optional<ScreenType>

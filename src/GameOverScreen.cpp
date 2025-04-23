@@ -17,6 +17,11 @@ auto GameOverScreen::Update(float delta_time, GameState &game_state) -> void
     {
         is_winner = true;
     }
+
+    if (IsKeyPressed(KEY_ENTER))
+    {
+        go_to_game = true;
+    }
 }
 
 auto GameOverScreen::Draw() const -> void
@@ -37,18 +42,12 @@ auto GameOverScreen::Draw() const -> void
 
 auto GameOverScreen::Message(std::string &text) -> void
 {
-    const int font_size = 60;
-    int text_size = MeasureText(text.c_str(), font_size);
-    int text_pos_x = (pong::WINDOW_WIDTH / 2) - (text_size / 2);
-    int text_pos_y = (pong::WINDOW_HEIGHT / 2) - (font_size / 2);
+    const int font_size_1{60};
+    Visuals::TextBox(text, font_size_1, pong::WINDOW_WIDTH / 2, pong::WINDOW_HEIGHT / 2);
 
-    int rect_pos_x = text_pos_x - pong::MARGIN;
-    int rect_pos_y = text_pos_y - pong::MARGIN;
-    int rect_width = text_size + (pong::MARGIN * 2);
-    int rect_heigh = font_size - 8 + (pong::MARGIN * 2);
-    DrawRectangle(rect_pos_x, rect_pos_y, rect_width, rect_heigh, DARKBLUE);
-
-    DrawText(text.c_str(), text_pos_x, text_pos_y, font_size, WHITE);
+    std::string text_press_enter{"Press enter to return"};
+    const int font_size_2{20};
+    Visuals::Text(text_press_enter, font_size_2, pong::WINDOW_WIDTH - 150, pong::WINDOW_HEIGHT - 30);
 }
 
 auto GameOverScreen::Exit() -> void
@@ -57,5 +56,9 @@ auto GameOverScreen::Exit() -> void
 
 auto GameOverScreen::NextScreen() const -> std::optional<ScreenType>
 {
+    if (go_to_game)
+    {
+        return ScreenType::GAME;
+    }
     return std::nullopt;
 }

@@ -8,6 +8,7 @@ class GameOverScreen : public Screen
 {
   private:
     bool is_winner{false};
+    bool go_to_game{false};
     static auto Message(std::string &text) -> void;
 
   public:

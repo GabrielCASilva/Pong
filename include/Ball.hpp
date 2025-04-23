@@ -18,6 +18,8 @@ class Ball
     [[nodiscard]] auto GetVelocity() const -> Vector2;
     [[nodiscard]] auto GetPosition() const -> Vector2;
 
+    bool is_colliding_paddle{false};
+
   private:
     float acceleration{};
     Vector2 position;

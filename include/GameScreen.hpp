@@ -7,6 +7,7 @@
 #include "Player.hpp"
 #include "Screen.hpp"
 #include <memory>
+#include <raylib.h>
 
 class GameScreen : public Screen
 {
@@ -21,6 +22,8 @@ class GameScreen : public Screen
     int timer_r{3};
     float timer{3.0F};
     bool init_timer{false};
+
+    Sound fx_ball{};
 
     // IU
     const int max_brightness{255};

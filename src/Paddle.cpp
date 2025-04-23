@@ -44,6 +44,8 @@ auto Paddle::Reset() -> void
 {
     position.x = initial_pos.x;
     position.y = initial_pos.y;
+    velocity.x = 0;
+    velocity.y = 0;
 }
 
 auto Paddle::Draw() const -> void
