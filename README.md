@@ -5,7 +5,7 @@
 </div>
 
 ## Description
-This is a Pong game made with C++ and Raylib. The project is currently under development.
+This is a Pong game made with C++ and Raylib.
 
 ### Warning
 This project is being developed on Linux. It can run on Windows, but may require some extra setup.
